@@ -1,9 +1,9 @@
 CREATE TABLE `data_platform_goods_movement_document_item_data`
 (
-  `BusinessPartner`                varchar(4) NOT NULL,        --新規追加
-  `GoodsMovementDocumentYear`      varchar(4) NOT NULL,        --名称変更
-  `GoodsMovementDocument`          varchar(10) NOT NULL,       --名称変更
-  `GoodsMovementDocumentItem`      varchar(4) NOT NULL,        --名称変更
+  `BusinessPartner`                int(4) NOT NULL,            --新規追加
+  `GoodsMovementDocumentYear`      int(4) NOT NULL,            --名称変更
+  `GoodsMovementDocument`          int(10) NOT NULL,           --名称変更
+  `GoodsMovementDocumentItem`      int(4) NOT NULL,            --名称変更
   `Product`                        varchar(40) DEFAULT NULL,   --名称変更
   `Plant`                          varchar(4) DEFAULT NULL,
   `StorageLocation`                varchar(4) DEFAULT NULL,
@@ -12,18 +12,18 @@ CREATE TABLE `data_platform_goods_movement_document_item_data`
   `PlusMinusFlag`                  varchar(1) DEFAULT NULL,　　--新規追加
   `InventoryStockType`             varchar(2) DEFAULT NULL,
   `InventoryValuationType`         varchar(1) DEFAULT NULL,
-  `Supplier`                       varchar(10) DEFAULT NULL,
-  `Customer`                       varchar(10) DEFAULT NULL,
-  `OrderID`                        varchar(10) DEFAULT NULL,  --名称変更
-  `OrderItem`                      varchar(6) DEFAULT NULL,   --名称変更
-  `OrderScheduleLine`              varchar(4) DEFAULT NULL,
+  `Supplier`                       int(10) DEFAULT NULL,
+  `Customer`                       int(10) DEFAULT NULL,
+  `OrderID`                        int(10) DEFAULT NULL,      --名称変更
+  `OrderItem`                      int(6) DEFAULT NULL,       --名称変更
+  `OrderScheduleLine`              int(4) DEFAULT NULL,
   `Project`                        varchar(24) DEFAULT NULL,
-  `ManufacturingOrder`             varchar(12) DEFAULT NULL,
-  `ManufacturingOrderItem`         varchar(4) DEFAULT NULL,
+  `ManufacturingOrder`             int(12) DEFAULT NULL,
+  `ManufacturingOrderItem`         int(4) DEFAULT NULL,
   `GoodsMovementRefDocType`        varchar(1) DEFAULT NULL,
   `GoodsMovementReasonCode`        varchar(4) DEFAULT NULL,
-  `DeliveryDocument`               varchar(10) DEFAULT NULL,  --名称変更
-  `DeliveryDocumentItem`           varchar(6) DEFAULT NULL,   --名称変更
+  `DeliveryDocument`               int(10) DEFAULT NULL,      --名称変更
+  `DeliveryDocumentItem`           int(6) DEFAULT NULL,       --名称変更
   `ProfitCenter`                   varchar(10) DEFAULT NULL,
   `GLAccount`                      varchar(10) DEFAULT NULL,
   `ProductBaseUnit`                varchar(3) DEFAULT NULL,   --名称変更
@@ -31,10 +31,10 @@ CREATE TABLE `data_platform_goods_movement_document_item_data`
   `EntryUnit`                      varchar(3) DEFAULT NULL,
   `QuantityInEntryUnit`            varchar(13) DEFAULT NULL,
   `Currency`          　           varchar(5) DEFAULT NULL,   --名称変更
-  `FiscalYear`                     varchar(4) DEFAULT NULL,
-  `FiscalYearPeriod`               varchar(7) DEFAULT NULL,
+  `FiscalYear`                     int(4) DEFAULT NULL,
+  `FiscalYearPeriod`               int(7) DEFAULT NULL,
   `IssuingPlant`                   varchar(4) DEFAULT NULL,  --新規追加
-  `IssuingPlantStorageLocation`    varchar(4) DEFAULT NULL,  --新規追加
+  `IssuingPlantStorageLocation`    varchar(1) DEFAULT NULL,  --新規追加
   `IssuingStockType`               varchar(2) DEFAULT NULL,  --新規追加
   `ReceivingPlant`                 varchar(4) DEFAULT NULL,  --新規追加
   `ReceivingPlantStorageLocation`  varchar(4) DEFAULT NULL,  --新規追加
@@ -43,15 +43,15 @@ CREATE TABLE `data_platform_goods_movement_document_item_data`
   `BatchValidityStartDate`         varchar(80) DEFAULT NULL,  --新規追加
   `BatchValidityEndDate`           varchar(80) DEFAULT NULL,  --新規追加
   `ManufactureDate`                varchar(80) DEFAULT NULL,
-  `Reservation`                    varchar(10) DEFAULT NULL,
-  `ReservationItem`                varchar(4) DEFAULT NULL,
-  `IsAutomaticallyCreated`         varchar(1) DEFAULT NULL,
+  `Reservation`                    int(10) DEFAULT NULL,
+  `ReservationItem`                int(4) DEFAULT NULL,
+  `IsAutomaticallyCreated`         tinyint(1) DEFAULT NULL,
   `GoodsMovementIsCancelled`       tinyint(1) DEFAULT NULL,
-  `ReversedGMDocumentYear`         varchar(4) DEFAULT NULL,  --名称変更
-  `ReversedGMDocument`             varchar(10) DEFAULT NULL, --名称変更
-  `ReversedGMDocumentItem`         varchar(4) DEFAULT NULL,  --名称変更
+  `ReversedGMDocumentYear`         int(4) DEFAULT NULL,      --名称変更
+  `ReversedGMDocument`             int(10) DEFAULT NULL,     --名称変更
+  `ReversedGMDocumentItem`         int(4) DEFAULT NULL,      --名称変更
   `GMDocumentPostingType`          varchar(1) DEFAULT NULL,  --名称変更
     PRIMARY KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`, `GoodsMovementDocumentItem`),
-    CONSTRAINT (`DPFMGoodsMovementDocumentItemData_fk`) FOREIGN KEY (`GoodsMovementDocumentYear`, `GoodsMovementDocument`) REFERENCES `data_platform_goods_movement_document_header_data` (`GoodsMovementDocumentYear`, `GoodsMovementDocument`)
+    CONSTRAINT (`DPFMGoodsMovementDocumentItemData_fk`) FOREIGN KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`) REFERENCES `data_platform_goods_movement_document_header_data` (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
