@@ -1,57 +1,61 @@
 CREATE TABLE `data_platform_goods_movement_document_item_data`
 (
-  `BusinessPartner`                int(4) NOT NULL,            --新規追加
-  `GoodsMovementDocumentYear`      int(4) NOT NULL,            --名称変更
-  `GoodsMovementDocument`          int(10) NOT NULL,           --名称変更
-  `GoodsMovementDocumentItem`      int(4) NOT NULL,            --名称変更
-  `Product`                        varchar(40) DEFAULT NULL,   --名称変更
+  `BusinessPartner`                int(12) NOT NULL,
+  `GoodsMovementDocumentYear`      int(4) NOT NULL,
+  `GoodsMovementDocumentMonth`     int(2) NOT NULL,
+  `GoodsMovementDocument`          int(16) NOT NULL,
+  `GoodsMovementDocumentItem`      int(6) NOT NULL,
+  `Product`                        varchar(40) DEFAULT NULL,
   `Plant`                          varchar(4) DEFAULT NULL,
   `StorageLocation`                varchar(4) DEFAULT NULL,
   `Batch`                          varchar(10) DEFAULT NULL,
   `GoodsMovementType`              varchar(3) DEFAULT NULL,
-  `PlusMinusFlag`                  varchar(1) DEFAULT NULL,　　--新規追加
+  `PlusMinusFlag`                  varchar(1) DEFAULT NULL,
   `InventoryStockType`             varchar(2) DEFAULT NULL,
   `InventoryValuationType`         varchar(1) DEFAULT NULL,
-  `Supplier`                       int(10) DEFAULT NULL,
-  `Customer`                       int(10) DEFAULT NULL,
-  `OrderID`                        int(10) DEFAULT NULL,      --名称変更
-  `OrderItem`                      int(6) DEFAULT NULL,       --名称変更
-  `OrderScheduleLine`              int(4) DEFAULT NULL,
+  `Supplier`                       int(12) DEFAULT NULL,
+  `Customer`                       int(12) DEFAULT NULL,
+  `OrderID`                        int(16) DEFAULT NULL,
+  `OrderItem`                      int(6) DEFAULT NULL,
+  `OrderScheduleLine`              int(3) DEFAULT NULL,
   `Project`                        varchar(24) DEFAULT NULL,
-  `ManufacturingOrder`             int(12) DEFAULT NULL,
-  `ManufacturingOrderItem`         int(4) DEFAULT NULL,
+  `ProductionOrder`                int(16) DEFAULT NULL,
+  `ProductionOrderItem`            int(4) DEFAULT NULL,
   `GoodsMovementRefDocType`        varchar(1) DEFAULT NULL,
   `GoodsMovementReasonCode`        varchar(4) DEFAULT NULL,
-  `DeliveryDocument`               int(10) DEFAULT NULL,      --名称変更
-  `DeliveryDocumentItem`           int(6) DEFAULT NULL,       --名称変更
+  `DeliveryDocument`               int(16) DEFAULT NULL,
+  `DeliveryDocumentItem`           int(6) DEFAULT NULL,
   `ProfitCenter`                   varchar(10) DEFAULT NULL,
   `GLAccount`                      varchar(10) DEFAULT NULL,
-  `ProductBaseUnit`                varchar(3) DEFAULT NULL,   --名称変更
+  `ProductBaseUnit`                varchar(3) DEFAULT NULL,
   `QuantityInBaseUnit`             varchar(13) DEFAULT NULL,
   `EntryUnit`                      varchar(3) DEFAULT NULL,
   `QuantityInEntryUnit`            varchar(13) DEFAULT NULL,
-  `Currency`          　           varchar(5) DEFAULT NULL,   --名称変更
+  `Currency`          　           varchar(5) DEFAULT NULL,
   `FiscalYear`                     int(4) DEFAULT NULL,
-  `FiscalYearPeriod`               int(7) DEFAULT NULL,
-  `IssuingPlant`                   varchar(4) DEFAULT NULL,  --新規追加
-  `IssuingPlantStorageLocation`    varchar(1) DEFAULT NULL,  --新規追加
-  `IssuingStockType`               varchar(2) DEFAULT NULL,  --新規追加
-  `ReceivingPlant`                 varchar(4) DEFAULT NULL,  --新規追加
-  `ReceivingPlantStorageLocation`  varchar(4) DEFAULT NULL,  --新規追加
-  `ReceivingStockType`             varchar(2) DEFAULT NULL,  --新規追加
-  `GoodsMovementDocumentItemText`  varchar(100) DEFAULT NULL, --名称変更
-  `BatchValidityStartDate`         varchar(80) DEFAULT NULL,  --新規追加
-  `BatchValidityEndDate`           varchar(80) DEFAULT NULL,  --新規追加
-  `ManufactureDate`                varchar(80) DEFAULT NULL,
-  `Reservation`                    int(10) DEFAULT NULL,
-  `ReservationItem`                int(4) DEFAULT NULL,
+  `FiscalYearPeriod`               int(3) DEFAULT NULL,
+  `IssuingPlant`                   varchar(4) DEFAULT NULL,
+  `IssuingPlantStorageLocation`    varchar(4) DEFAULT NULL,
+  `IssuingStockType`               varchar(2) DEFAULT NULL,
+  `ReceivingPlant`                 varchar(4) DEFAULT NULL,
+  `ReceivingPlantStorageLocation`  varchar(4) DEFAULT NULL,
+  `ReceivingStockType`             varchar(2) DEFAULT NULL,
+  `GoodsMovementDocumentItemText`  varchar(100) DEFAULT NULL,
+  `BatchValidityStartDate`         date DEFAULT NULL,
+  `BatchValidityEndDate`           date DEFAULT NULL,
+  `ManufactureDate`                date DEFAULT NULL,
+  `Reservation`                    int(16) DEFAULT NULL,
+  `ReservationItem`                int(6) DEFAULT NULL,
   `IsAutomaticallyCreated`         tinyint(1) DEFAULT NULL,
   `GoodsMovementIsCancelled`       tinyint(1) DEFAULT NULL,
-  `ReversedGMDocumentYear`         int(4) DEFAULT NULL,      --名称変更
-  `ReversedGMDocument`             int(10) DEFAULT NULL,     --名称変更
-  `ReversedGMDocumentItem`         int(4) DEFAULT NULL,      --名称変更
-  `GMDocumentPostingType`          varchar(1) DEFAULT NULL,  --名称変更
-    PRIMARY KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`, `GoodsMovementDocumentItem`),
-    CONSTRAINT (`DPFMGoodsMovementDocumentItemData_fk`) FOREIGN KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`) REFERENCES `data_platform_goods_movement_document_header_data` (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`)
+  `ReversedGMDocumentYear`         int(4) DEFAULT NULL,
+  `ReversedGMDocument`             int(16) DEFAULT NULL,
+  `ReversedGMDocumentItem`         int(6) DEFAULT NULL,
+  `GMDocumentPostingType`          varchar(1) DEFAULT NULL,
+
+    PRIMARY KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocumentMonth`, `GoodsMovementDocument`, `GoodsMovementDocumentItem`),
+    
+    CONSTRAINT `DPFMGoodsMovementDocumentItemData_fk` FOREIGN KEY (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocument`) REFERENCES `data_platform_goods_movement_document_header_data` (`BusinessPartner`, `GoodsMovementDocumentYear`, `GoodsMovementDocumentMonth`, `GoodsMovementDocument`)
+
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8mb4;
